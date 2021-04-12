@@ -12,11 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const discord_akairo_1 = require("discord-akairo");
 const chordApi_1 = require("../util/chordApi");
 const discord_js_1 = require("discord.js");
+const { PREFIX } = require("../../config.json");
 let memory = new Map();
 class SearchChords extends discord_akairo_1.Command {
     constructor() {
         super("chords", {
-            aliases: ["chords"],
+            aliases: ["chords", "chord"],
             args: [
                 {
                     id: "chords",
@@ -30,9 +31,44 @@ class SearchChords extends discord_akairo_1.Command {
     }
     exec(message, args) {
         return __awaiter(this, void 0, void 0, function* () {
+            if (args.chords.toLocaleLowerCase() === "help") {
+                return message.reply(new discord_js_1.MessageEmbed()
+                    .setTitle("Chords - Help")
+                    .setDescription("You may search for all chords. Let me show you some examples.")
+                    .addFields({
+                    name: "Major Chords",
+                    value: `> \`${PREFIX}${this.aliases[0]} A C G\``,
+                }, {
+                    name: "Minor Chords",
+                    value: `> \`${PREFIX}${this.aliases[0]} Am, Cm, Gm\``,
+                }, {
+                    name: "7th Chords",
+                    value: `> \`${PREFIX}${this.aliases[0]} G7 C7 A7\``,
+                }, {
+                    name: "Flats",
+                    value: `> \`${PREFIX}${this.aliases[0]} Bb Db Eb\``,
+                }, {
+                    name: "Suspended & Diminished Chords",
+                    value: `> \`${PREFIX}${this.aliases[0]} Bsus2 Asus2 Gsus2\``,
+                }, {
+                    name: "Augmented & Add Chords",
+                    value: `> \`${PREFIX}${this.aliases[0]} Caug Dadd9 Fadd9\``,
+                }, {
+                    name: "Notice: No Sharps!",
+                    value: `> A C# necomes a Db, and so on.`,
+                })
+                    .setTimestamp()
+                    .setThumbnail("https://icon-library.com/images/ukulele-icon/ukulele-icon-3.jpg")
+                    .setFooter("Sus4-chords currently do not work. Don't ask me why.")
+                    .setColor("GOLD"));
+            }
             const chordApi = new chordApi_1.ChordApi();
             const hasComa = args.chords.includes(",");
-            const rawChordsArray = args.chords.split(hasComa ? "," : " ");
+            const rawChordsArray = args.chords
+                .split(/[ ,]+/)
+                .join(",")
+                .split(",")
+                .map((e) => e.trim());
             const chordApiDtos = rawChordsArray.map((_chord) => {
                 const chordArray = _chord.split("");
                 let root = chordArray.shift().toUpperCase();
@@ -60,7 +96,9 @@ class SearchChords extends discord_akairo_1.Command {
                     .setTitle(value[0].chord_name)
                     .setColor("GREEN")
                     .setImage(value[0].chord_diag[0])
-                    .setURL(value[0].chord_url[0]);
+                    .setURL(value[0].chord_url[0])
+                    .addField("To see different variants of this chord", "> hit the ⬅️ and / or the ➡️ button below.")
+                    .setFooter(`Do \`${PREFIX}${this.aliases[0]} help\` for more information.`);
             });
             cachedChordEmbeds.forEach((e) => message.reply(e).then((sentEmbed) => {
                 sentEmbed.react("⬅️");
@@ -105,7 +143,9 @@ class SearchChords extends discord_akairo_1.Command {
                         .setTitle(promise[0].chord_name)
                         .setColor("GREEN")
                         .setImage(promise[0].chord_diag[0])
-                        .setURL(promise[0].chord_diag[0]);
+                        .setURL(promise[0].chord_diag[0])
+                        .addField("To see different variants of this chord", "> hit the ⬅️ and / or the ➡️ button below.")
+                        .setFooter(`Do \`${PREFIX}${this.aliases[0]} help\` for more information.`);
                 });
                 return embeds;
             })
@@ -114,7 +154,8 @@ class SearchChords extends discord_akairo_1.Command {
                     .setTimestamp()
                     .setTitle("Error occured.")
                     .setDescription("Chances are, you mispelled a chord name.")
-                    .addField("For more information on this, do", `${this.prefix}${this.aliases[0]} help`)
+                    .addField("For more information on this, do", `> \`${PREFIX}${this.aliases[0]} help\``)
+                    .addField("Maybe take a look at this guide showing the proper usage.", "> https://ukulele-chords.com/api")
                     .setThumbnail("https://icon-library.com/images/ukulele-icon/ukulele-icon-3.jpg")
                     .setColor("RED")
                     .setFooter("Examples: Am, C, Cdim, Bsus2, Gaug");

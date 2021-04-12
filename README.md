@@ -29,7 +29,11 @@ The finished product should look similar to this
 ```
 
 To get your `DISCORD_BOT_TOKEN` follow this [guide](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/)
+
 To get the `DISCORD_CLIENT_ID`, you also need to visit [discord-dev-portal](https://discord.com/developers)
+
 Set the prefix to your liking, I do not encourage using "/". You will see for yourself :D
+
 To get your `UKULELE_CHORDS_API_KEY` go to [this site](https://ukulele-chords.com/api) and click **Get your API KEY**.
+
 If you want to use another `BOT_THUMBNAIL`, go ahead and change it.
