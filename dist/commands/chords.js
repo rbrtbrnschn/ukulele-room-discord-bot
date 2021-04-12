@@ -154,6 +154,7 @@ class SearchChords extends discord_akairo_1.Command {
                     .setTimestamp()
                     .setTitle("Error occured.")
                     .setDescription("Chances are, you mispelled a chord name.")
+                    .addField("DISCLAIMER!", "sus4-chords currently do not work - no clue why")
                     .addField("For more information on this, do", `> \`${PREFIX}${this.aliases[0]} help\``)
                     .addField("Maybe take a look at this guide showing the proper usage.", "> https://ukulele-chords.com/api")
                     .setThumbnail("https://icon-library.com/images/ukulele-icon/ukulele-icon-3.jpg")
