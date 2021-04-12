@@ -201,6 +201,10 @@ class SearchChords extends Command {
           .setTitle("Error occured.")
           .setDescription("Chances are, you mispelled a chord name.")
           .addField(
+            "DISCLAIMER!",
+            "sus4-chords currently do not work - no clue why"
+          )
+          .addField(
             "For more information on this, do",
             `> \`${PREFIX}${this.aliases[0]} help\``
           )
