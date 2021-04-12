@@ -10,7 +10,8 @@ Installation:
 2. go into folder
 3. rename configSAMPLE.json to config.json
 4. setup the config.json file properly (further instructions follow)
-5. run launch.bat
+5. run install.bat (should close after a few seconds to a minute)
+6. run launch.bat && and keep open
 
 ## Setting up the config.json
 
