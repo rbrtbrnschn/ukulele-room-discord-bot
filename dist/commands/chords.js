@@ -196,4 +196,5 @@ class SearchChords extends discord_akairo_1.Command {
     }
 }
 exports.default = SearchChords;
+// test
 //# sourceMappingURL=chords.js.map
