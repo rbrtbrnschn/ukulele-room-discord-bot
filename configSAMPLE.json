@@ -1,0 +1,7 @@
+{
+  "DISCORD_BOT_TOKEN": "A Long line of characters...",
+  "DISCORD_CLIENT_ID": "Just some numbers",
+  "PREFIX": "?",
+  "UKULELE_CHORDS_API_KEY": "your api key from https://ukulele-chords.com/api",
+  "BOT_THUMBNAIL": "https://icon-library.com/images/ukulele-icon/ukulele-icon-3.jpg"
+}
