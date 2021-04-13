@@ -6,10 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChordApi = void 0;
 const axios_1 = __importDefault(require("axios"));
 const xml2js_1 = require("xml2js");
-const { UKULELE_CHORDS_API_KEY } = require("../../config.json");
+const config_1 = require("../config");
 class ChordApi {
     constructor() {
-        this.base = `https://ukulele-chords.com/get?ak=${UKULELE_CHORDS_API_KEY}`;
+        this.base = `https://ukulele-chords.com/get?ak=${config_1.UKULELE_CHORDS_API_KEY}`;
     }
     forChord(chordDto) {
         const AxiosInstance = axios_1.default.create();
