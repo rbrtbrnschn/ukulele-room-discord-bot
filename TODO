@@ -1,0 +1,24 @@
+  Legend
+  Q1: Urgent / Important
+  Q2: Not urgent / Important
+  Q3: Urgent / Not important
+  Q4: Not urgent / Not important
+Q1:
+  ☐ 
+Q2:
+  ✔ rewrite as public bot @started(21-04-13 09:17) @done(21-04-13 10:26) @lasted(1h9m15s)
+    ✔ remove node-cron
+    ✔ add prefix flexibility @done(21-04-13 09:50)
+  ☐ hosting
+Q3:
+  ☐ 
+Q4:
+  ☐ add https://ukulele-tabs.com as song db / scraper
+  ☐ progressions - add command
+  ☐ progressions - list command (incl. pagination)
+  ☐ progressions - seperate into own db.
+  ☐ @low progressions - add strumming patterns to progression
+  ☐ @low Tutor:
+  ☐ roadmap
+  ☐ resources
+

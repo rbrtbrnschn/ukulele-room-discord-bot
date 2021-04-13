@@ -3,4 +3,3 @@ export interface Suggestion {
   username: String;
   displayName: String;
 }
-export const suggestions: Suggestion[] = [];

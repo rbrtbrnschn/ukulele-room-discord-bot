@@ -1,7 +1,9 @@
 import { Message, MessageEmbed } from "discord.js";
 
 import { Command } from "discord-akairo";
-const { BOT_THUMBNAIL, PREFIX } = require("../../config.json");
+import { BOT_THUMBNAIL, PREFIX } from "../../config";
+import { guilds } from "../../guilds";
+import { UkuleleMessage } from "../../interfaces/ukuleleMessage.interface";
 class Guide extends Command {
   constructor() {
     super("guide", {
@@ -9,7 +11,8 @@ class Guide extends Command {
     });
   }
 
-  exec(message: Message) {
+  exec(message: UkuleleMessage) {
+    const { __prefix: prefix } = message;
     const embed = new MessageEmbed()
       .setTitle("Help - Spotlight")
       .setDescription(
@@ -23,20 +26,20 @@ class Guide extends Command {
       .setColor("GOLD")
       .addFields([
         {
-          name: `Search for tabs for your favourite songs - ${PREFIX}song`,
-          value: `\`> ${PREFIX}song riptide\``,
+          name: `Search for tabs for your favourite songs - ${prefix}song`,
+          value: `\`${prefix}song riptide\``,
         },
         {
-          name: `Forgot a chord? Look it up! - ${PREFIX}chords`,
-          value: `\`> ${PREFIX}chords Am G E7 Dm\``,
+          name: `Forgot a chord? Look it up! - ${prefix}chords`,
+          value: `\`${prefix}chords Am G E7 Dm\``,
         },
         {
-          name: `Want to learn a new tune? Easy! - ${PREFIX}progressions`,
-          value: `\`${PREFIX}progressions\``,
+          name: `Want to learn a new tune? Easy! - ${prefix}progressions`,
+          value: `\`${prefix}progressions\``,
         },
         {
-          name: `Got an Idea? Leave a suggestion. - ${PREFIX}suggestion`,
-          value: `\`${PREFIX}suggestion\``,
+          name: `Got an Idea? Leave a suggestion. - ${prefix}suggestion`,
+          value: `\`${prefix}suggestion\``,
         },
       ]);
 

@@ -2,7 +2,7 @@ import { Message } from "discord.js";
 import { Command } from "discord-akairo";
 import { MessageEmbed } from "discord.js";
 
-import { UketabsScraper } from "../util/UketabsWebScraper";
+import { UketabsScraper } from "../../util/UketabsWebScraper";
 import { User } from "discord.js";
 import { MessageReaction } from "discord.js";
 
@@ -13,7 +13,7 @@ interface Args {
 class SongCommand extends Command {
   constructor() {
     super("search for song", {
-      aliases: ["song"],
+      aliases: ["song", "lyrics"],
       args: [
         {
           id: "title",
@@ -43,10 +43,7 @@ class SongCommand extends Command {
 
     const songsDto = await uketabs.scrapeSong(url);
 
-    if (!songsDto)
-      return message.reply(
-        "Something went terribly wrong, please contact @rbrtbrnschn#0303"
-      );
+    if (!songsDto) return message.reply(somethingWentTerriblyWrong());
     if (!songsDto.length) return message.reply(noSongsFound(args.title));
 
     const firstSong = songsDto[0];
@@ -57,7 +54,8 @@ class SongCommand extends Command {
         .setURL(song.href as string)
         .setTimestamp()
         .setDescription("React to this message to get the chords/lyrics!")
-        .setColor("GOLD");
+        .setColor("GOLD")
+        .setFooter("This service is powered by https://ukutabs.com.");
 
       songsDto.shift();
       const secondThreeSongs = songsDto.slice(0, 3);

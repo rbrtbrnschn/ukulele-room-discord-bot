@@ -1,6 +1,6 @@
 import axios from "axios";
 import { parseStringPromise } from "xml2js";
-const { UKULELE_CHORDS_API_KEY } = require("../../config.json");
+import { UKULELE_CHORDS_API_KEY } from "../config";
 export interface ChordDto {
   chord: String;
   type: String;

@@ -2,9 +2,10 @@ import { CommandHandler, ListenerHandler } from "discord-akairo";
 import { AkairoClient } from "discord-akairo";
 import path from "path";
 import * as nodeCron from "node-cron";
-import { suggestions } from "./suggestions";
+import { Message } from "discord.js";
+import { guilds } from "./guilds";
 
-const { DISCORD_BOT_TOKEN, PREFIX } = require("../config.json");
+import { DISCORD_BOT_TOKEN, PREFIX } from "./config";
 
 class MyClient extends AkairoClient {
   commandHandler: CommandHandler;
@@ -17,13 +18,17 @@ class MyClient extends AkairoClient {
       {
         // Options for discord.js goes here.
         disableMentions: "everyone",
-        presence: { activity: { type: "LISTENING", name: `${PREFIX}help` } },
+        presence: { activity: { type: "WATCHING", name: `${PREFIX}help` } },
       }
     );
 
     this.commandHandler = new CommandHandler(this as any, {
       directory: path.join(__dirname, "./commands/"),
-      prefix: PREFIX, // "/"
+      prefix: (msg: Message) => {
+        const existingGuild = guilds.get(msg.guild.id);
+        if (!existingGuild) return PREFIX;
+        return existingGuild.prefix;
+      },
     });
     this.listenerHandler = new ListenerHandler(this as any, {
       directory: path.join(__dirname, "./listeners/"),
@@ -38,28 +43,28 @@ const client = new MyClient();
 client.login(DISCORD_BOT_TOKEN);
 
 // Suggestionbox
-const expression = true ? "0 8 * * *" : "*/10 * * * * *";
-nodeCron.schedule(expression, async () => {
-  const UkuleleRoom = client.guilds.cache.get("831083103161548820");
-  await UkuleleRoom.members.fetch();
-  const rbrtbrnschn = UkuleleRoom.members.cache.find(
-    (e) => e.user.id === "384079582267047937"
-  );
-  if (!rbrtbrnschn) return;
-  if (!suggestions.length) return;
+// const expression = true ? "0 8 * * *" : "*/10 * * * * *";
+// nodeCron.schedule(expression, async () => {
+//   const UkuleleRoom = client.guilds.cache.get("831083103161548820");
+//   await UkuleleRoom.members.fetch();
+//   const rbrtbrnschn = UkuleleRoom.members.cache.find(
+//     (e) => e.user.id === "384079582267047937"
+//   );
+//   if (!rbrtbrnschn) return;
+//   if (!suggestions.length) return;
 
-  console.log("Sent all suggestions to @rbrtbrnschn.");
-  rbrtbrnschn.createDM().then((dms) => {
-    suggestions.forEach((sug, index) =>
-      dms
-        .send(
-          `> Username: ${sug.username}\n> DisplayName: ${sug.displayName}\n\n${sug.content}`
-        )
-        .then((sentMessage) => {
-          suggestions.splice(index, 1);
-          if (suggestions.length === 1) suggestions.pop();
-        })
-        .catch(console.log)
-    );
-  });
-});
+//   console.log("Sent all suggestions to @rbrtbrnschn.");
+//   rbrtbrnschn.createDM().then((dms) => {
+//     suggestions.forEach((sug, index) =>
+//       dms
+//         .send(
+//           `> Username: ${sug.username}\n> DisplayName: ${sug.displayName}\n\n${sug.content}`
+//         )
+//         .then((sentMessage) => {
+//           suggestions.splice(index, 1);
+//           if (suggestions.length === 1) suggestions.pop();
+//         })
+//         .catch(console.log)
+//     );
+//   });
+// });

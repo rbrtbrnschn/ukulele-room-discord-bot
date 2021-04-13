@@ -1,9 +1,10 @@
 import { Message } from "discord.js";
 
 import { Command } from "discord-akairo";
-import { ChordApi } from "../util/chordApi";
+import { ChordApi } from "../../util/chordApi";
 import { MessageEmbed } from "discord.js";
-const { PREFIX } = require("../../config.json");
+import { UkuleleMessage } from "../../interfaces/ukuleleMessage.interface";
+import { BOT_THUMBNAIL } from "../../config";
 
 let memory = new Map<String, ApiDto[]>();
 
@@ -36,7 +37,8 @@ class SearchChords extends Command {
     });
   }
 
-  async exec(message: Message, args: Args) {
+  async exec(message: UkuleleMessage, args: Args) {
+    const { __prefix: prefix } = message;
     if (args.chords.toLocaleLowerCase() === "help") {
       return message.reply(
         new MessageEmbed()
@@ -47,27 +49,27 @@ class SearchChords extends Command {
           .addFields(
             {
               name: "Major Chords",
-              value: `> \`${PREFIX}${this.aliases[0]} A C G\``,
+              value: `> \`${prefix}${this.aliases[0]} A C G\``,
             },
             {
               name: "Minor Chords",
-              value: `> \`${PREFIX}${this.aliases[0]} Am, Cm, Gm\``,
+              value: `> \`${prefix}${this.aliases[0]} Am, Cm, Gm\``,
             },
             {
               name: "7th Chords",
-              value: `> \`${PREFIX}${this.aliases[0]} G7 C7 A7\``,
+              value: `> \`${prefix}${this.aliases[0]} G7 C7 A7\``,
             },
             {
               name: "Flats",
-              value: `> \`${PREFIX}${this.aliases[0]} Bb Db Eb\``,
+              value: `> \`${prefix}${this.aliases[0]} Bb Db Eb\``,
             },
             {
               name: "Suspended & Diminished Chords",
-              value: `> \`${PREFIX}${this.aliases[0]} Bsus2 Asus2 Gsus2\``,
+              value: `> \`${prefix}${this.aliases[0]} Bsus2 Asus2 Gsus2\``,
             },
             {
               name: "Augmented & Add Chords",
-              value: `> \`${PREFIX}${this.aliases[0]} Caug Dadd9 Fadd9\``,
+              value: `> \`${prefix}${this.aliases[0]} Caug Dadd9 Fadd9\``,
             },
             {
               name: "Notice: No Sharps!",
@@ -75,9 +77,7 @@ class SearchChords extends Command {
             }
           )
           .setTimestamp()
-          .setThumbnail(
-            "https://icon-library.com/images/ukulele-icon/ukulele-icon-3.jpg"
-          )
+          .setThumbnail(BOT_THUMBNAIL)
           .setFooter("Sus4-chords currently do not work. Don't ask me why.")
           .setColor("GOLD")
       );
@@ -129,7 +129,7 @@ class SearchChords extends Command {
             "> hit the ⬅️ and / or the ➡️ button below."
           )
           .setFooter(
-            `Do \`${PREFIX}${this.aliases[0]} help\` for more information.`
+            `Do \`${prefix}${this.aliases[0]} help\` for more information.`
           );
       }
     );
@@ -190,7 +190,7 @@ class SearchChords extends Command {
               "> hit the ⬅️ and / or the ➡️ button below."
             )
             .setFooter(
-              `Do \`${PREFIX}${this.aliases[0]} help\` for more information.`
+              `Do \`${prefix}${this.aliases[0]} help\` for more information.`
             );
         });
         return embeds;
@@ -206,7 +206,7 @@ class SearchChords extends Command {
           )
           .addField(
             "For more information on this, do",
-            `> \`${PREFIX}${this.aliases[0]} help\``
+            `> \`${prefix}${this.aliases[0]} help\``
           )
           .addField(
             "Maybe take a look at this guide showing the proper usage.",
@@ -258,4 +258,3 @@ class SearchChords extends Command {
 }
 
 export default SearchChords;
-// test s
