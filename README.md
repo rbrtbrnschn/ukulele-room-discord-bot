@@ -8,25 +8,25 @@ Installation:
 
 1. download folder
 2. go into folder
-3. rename configSAMPLE.json to config.json
-4. setup the config.json file properly (further instructions follow)
+3. rename src/SAMPLECONFIG.ts to src/config.ts
+4. setup the config.ts file properly (further instructions follow)
 5. run install.bat (should close after a few seconds to a minute)
 6. run launch.bat && and keep open
 
 ## Setting up the config.json
 
-Once you have renamed the configSAMPLE.json, follow along.
+Once you have renamed the src/SAMPLECONFIG.ts, follow along.
 
 The finished product should look similar to this
 
-```json
-{
-  "DISCORD_BOT_TOKEN": "ODMxMDc1OTF3NDEyOTU4MjY5.AHP9ww.RoRnbb2v2HdT6ZrbrJvJp",
-  "DISCORD_CLIENT_ID": "213871237213781237",
-  "PREFIX": "/",
-  "UKULELE_CHORDS_API_KEY": "1823778asd82387afe7182378ads328",
-  "BOT_THUMBNAIL": "https://icon-library.com/images/ukulele-icon/ukulele-icon-3.jpg"
-}
+```ts
+export const DISCORD_BOT_TOKEN =
+  "ODMxMDc1OTE3NDAxeDO6mKY6.781237.RoRnbb2v2HqT6ZrbrJvJp-jukw8";
+export const DISCORD_CLIENT_ID = "123877981237231777";
+export const PREFIX = ">";
+export const UKULELE_CHORDS_API_KEY = "86a9106ae65537651a8asdasdasdasda";
+export const BOT_THUMBNAIL =
+  "https://icon-library.com/images/ukulele-icon/ukulele-icon-3.jpg";
 ```
 
 To get your `DISCORD_BOT_TOKEN` follow this [guide](https://www.freecodecamp.org/news/create-a-discord-bot-with-python/)
