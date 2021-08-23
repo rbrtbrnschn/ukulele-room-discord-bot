@@ -38,6 +38,10 @@ class Guide extends Command {
           value: `\`${prefix}progressions\``,
         },
         {
+          name: `Want to learn a scale or mode?`,
+          value: `\`${prefix}scales\` or \`${prefix}modes\``,
+        },
+        {
           name: `Got an Idea? Leave a suggestion. - ${prefix}suggestion`,
           value: `\`${prefix}suggestion\``,
         },
